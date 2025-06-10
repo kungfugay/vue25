@@ -1,0 +1,61 @@
+<!-- Vue Computed Properties
+* Computed 프로퍼티는 데이터 프로퍼티랑 비슷하지만 다른 프로퍼티에 의존한다는 점이 다름 
+* 메소드처럼 작성하지만, input 인수를 허용하지 않음
+* 이벤트 핸들러처럼 종속하는 프로퍼티의 값이 변경되면 자동으로 업데이트가 된다.
+* 즉 그 return 값만 쓸 수 있고, 직접 호출은 불가함
+
+문법
+const app = Vue.createApp({
+  data() {
+    ...
+  },
+  computed: {
+    ...
+  },
+  methods: {
+    ...
+  }
+})
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <form>
+        <p>
+          Important item?
+          <label>
+            <input type="checkbox" v-model="chbxVal" />
+            {{ isImportant }}
+          </label>
+        </p>
+      </form>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            chbxVal: false,
+          };
+        },
+        computed: {
+          isImportant() {
+            if (this.chbxVal) {
+              return "네";
+            } else {
+              return "아뇨";
+            }
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
