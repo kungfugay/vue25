@@ -1,0 +1,82 @@
+<!-- 
+간단한 투두리스트 앱 만들기 
+ 
+1) 메모 텍스트를 입력하고
+2) 중요한건지 체크
+3) 먼저 추가된 순서부터 옆칸에 띄워줘야 함.
+-->
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <title>Simple Todo</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      #ulToDone > li {
+        background: yellow;
+      }
+      #ulDone > li {
+        background-color: gray;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <form v-on:submit.prevent="addItem">
+        <h3>할 일 추가하기</h3>
+        <input type="text" v-model="title" required /> <br />
+        중요한가요?
+        <input type="checkbox" v-model="isImportant" /> {{isImportant? "예":
+        "아니오"}} <br />
+        <button type="submit">추가</button>
+      </form>
+      <hr />
+      <h3>예정된 할 일</h3>
+      <ul id="ulToDone">
+        <li
+          v-for="(x, index) in todoList"
+          v-show="!x.isDone"
+          v-on:click="x.isDone = !x.isDone"
+        >
+          {{x}}
+        </li>
+      </ul>
+      <h3>완료된 할 일</h3>
+      <ul id="ulDone">
+        <li
+          v-for="(x, index) in todoList"
+          v-show="x.isDone"
+          v-on:click="x.isDone = !x.isDone"
+        >
+          {{x}}
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            title: null,
+            isImportant: false,
+            todoList: [{ title: "숨쉬기", isImportant: true, isDone: false }],
+          };
+        },
+        methods: {
+          addItem() {
+            let item = {
+              title: this.title,
+              isImportant: this.isImportant,
+              isDone: false,
+            };
+            this.todoList.push(item);
+            this.title = null;
+            this.isImportant = null;
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
