@@ -1,0 +1,52 @@
+<!-- 
+Vue Directives (뷰 지시문)
+
+* v- 접두사로 시작함
+* HTML 태그에 추가 기능을 제공함
+* vue 인스턴스에 연결해서 동적 및 반응형 사용자 인터페이스를 만듦
+
+* v-bind
+* v-if
+* v-show
+* v-for
+* v-on
+* v-model
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      div {
+        margin: 10px;
+        padding: 10px;
+        border: solid black 1px;
+        display: inline-block;
+      }
+      .pinkBG {
+        background-color: lightpink;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!-- id가 app인 div 태그 안에 있는 모든 것들은 vue 인스턴스의 데이터를 가져다 사용할 수 있음 -->
+      <div v-bind:class="vueClass">
+        This element is bound to the "pinkBG" class.
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            vueClass: "pinkBG",
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

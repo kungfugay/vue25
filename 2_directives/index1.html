@@ -1,0 +1,135 @@
+<!-- 
+V-bind 지시어
+
+~구문~
+<div v-bind:[attribute]="[Vue data]"></div>
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 문자 인코딩 설정 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 반응형 디자인 위한 뷰포트 설정 -->
+    <title>Vue.js v-bind 예제</title>
+    <!-- 페이지 제목 -->
+
+    <!-- 간단한 CSS 스타일 -->
+    <style>
+      #app > div {
+        width: 200px; /* 너비 설정 */
+        padding: 20px; /* 안쪽 여백 */
+        border: dashed black 1px; /* 테두리 스타일 */
+        margin-bottom: 10px; /* 요소 아래쪽 여백 */
+      }
+      img {
+        width: 150px; /* 이미지 너비 설정 */
+        display: block; /* 이미지를 블록 요소로 만들어 아래 div와 분리 */
+        margin-bottom: 10px; /* 이미지 아래쪽 여백 */
+      }
+      .vvvv {
+        background-color: burlywood; /* 'vvvv' 클래스의 배경색 */
+      }
+      /* 추가적인 스타일: isImportant 클래스 */
+      .is-important {
+        background-color: lightcoral !important; /* 삼항 연산자 예시를 위해 !important 사용 (주의 필요) */
+      }
+      .is-not-important {
+        background-color: lightgray !important; /* 삼항 연산자 예시를 위해 !important 사용 (주의 필요) */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <!--
+            V-bind 지시어 (Directive)
+
+            ✨ 역할: HTML 속성(attribute)에 Vue 데이터 값을 연결(바인딩)합니다.
+                   데이터가 변경되면 속성 값도 자동으로 업데이트됩니다.
+
+            ✅ 기본 구문: <요소 v-bind:[속성 이름]="[Vue 데이터 속성 또는 표현식]"></요소>
+                   단축 구문: <요소 :[속성 이름]="[Vue 데이터 속성 또는 표현식]"></요소>
+                   (':' 콜론은 v-bind의 단축키입니다!)
+        -->
+
+      <h2>🖼️ 이미지 src 바인딩 (:src)</h2>
+      <!-- v-bind:src="url"은 :src="url"과 같습니다. -->
+      <!-- `url` 데이터 속성의 값에 따라 이미지 src 속성이 변경됩니다. -->
+      <img :src="url" alt="데이터 바인딩된 이미지" />
+
+      <h2>📏 스타일 바인딩 (:style)</h2>
+      <!-- 객체 구문 사용: CSS 속성을 JavaScript 객체 형태로 바인딩 -->
+      <!-- {{ fontSize: size }} 객체의 fontSize 속성에 `size` 데이터 값을 연결합니다. -->
+      <div :style="{ fontSize: size }">Text Example 1: '28px'</div>
+
+      <!-- 계산된 값으로 스타일 바인딩 -->
+      <!-- {{ fontSize: sizeVal + 'px' }} 처럼 표현식을 사용해서 동적으로 값을 만들 수 있습니다. -->
+      <div :style="{ fontSize: sizeVal + 'px'}">Text Example 2: '32px'</div>
+
+      <!-- CSS 속성 이름 표기법 주의! -->
+      <!-- JavaScript 객체에서는 'backgroundColor' (camelCase)를 사용합니다. -->
+      <!-- 'background-color' (kebab-case)처럼 하이픈으로 쓰는 것도 가능하지만 (예: 'background-color': '...') -->
+      <!-- JavaScript 객체 속성 이름으로는 camelCase가 더 일반적이고 권장됩니다. -->
+      <div :style="{ backgroundColor: 'hsl('+bgVal+',80%,80%)' }">
+        Text Example 3: 배경색 (HSL) 바인딩
+      </div>
+
+      <!-- 삼항 조건 연산자를 이용한 스타일 바인딩 -->
+      <!-- `isImportant` 데이터 값에 따라 배경색이 달라집니다. -->
+      <div
+        :style="{ backgroundColor: isImportant ? 'lightcoral' : 'lightgray' }"
+      >
+        Text Example 4: 삼항 조건문으로 배경색 바인딩
+      </div>
+      <!-- 참고: 클래스 바인딩 (:class)으로 조건부 스타일을 적용하는 것이 더 일반적입니다. -->
+      <div
+        :class="{ 'is-important': isImportant, 'is-not-important': !isImportant }"
+      >
+        Text Example 5: 클래스 바인딩으로 조건부 배경색 (더 일반적인 방법)
+      </div>
+
+      <h2>🏷️ 클래스 바인딩 (:class)</h2>
+      <!-- 문자열 구문 사용: `className` 데이터 속성 값('vvvv')이 클래스로 적용됩니다. -->
+      <div :class="className">
+        Class Example 1: 데이터 속성 값으로 클래스 바인딩
+      </div>
+
+      <!-- 객체 구문 사용: 객체의 키가 클래스 이름, 값이 true/false 여부 -->
+      <!-- { vvvv: true }는 'vvvv' 클래스를 적용합니다. -->
+      <div :class="{ vvvv: true }">Class Example 2: 객체 구문 (값: true)</div>
+
+      <!-- { vvvv: false }는 'vvvv' 클래스를 적용하지 않습니다. -->
+      <div :class="{ vvvv: false }">Class Example 3: 객체 구문 (값: false)</div>
+
+      <!-- 배열 구문 사용 예시 (데이터에 클래스 여러 개 지정 가능) -->
+      <!-- <div :class="['class1', 'class2', { 'class3': someCondition }]">...</div> -->
+    </div>
+
+    <!-- Vue 3 라이브러리 가져오기 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      // Vue 애플리케이션 생성
+      const app = Vue.createApp({
+        // data() 함수: 컴포넌트의 상태(데이터)를 정의합니다.
+        // 여기서 반환된 객체의 속성들은 템플릿에서 {{ 속성명 }} 또는 v-bind 등으로 접근 가능합니다.
+        data() {
+          return {
+            url: "img_beach3.jpg", // 이미지 src에 사용될 데이터
+            size: "28px", // fontSize 스타일에 사용될 데이터 (단위 포함)
+            sizeVal: "32", // fontSize 스타일에 사용될 데이터 (단위 미포함, 계산해서 사용)
+            bgVal: 180, // backgroundColor (HSL) 계산에 사용될 데이터
+            isImportant: true, // 삼항 연산자 또는 조건부 클래스에 사용될 불리언 데이터
+            className: "vvvv", // 클래스 바인딩에 사용될 문자열 데이터
+          };
+        },
+        // 다른 옵션들 (methods, computed, watch 등)은 여기에 추가됩니다.
+      });
+
+      // Vue 애플리케이션을 #app 엘리먼트에 마운트(연결)합니다.
+      // 이제 #app 안에서는 Vue가 데이터를 관리하고 화면을 업데이트합니다.
+      app.mount("#app");
+    </script>
+  </body>
+</html>
