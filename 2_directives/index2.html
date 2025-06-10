@@ -1,0 +1,60 @@
+<!--
+v-if 지시어
+- 조건에 따라서 html 요소를 만들 수 있음
+- 조건부 렌더링은 조건이 true인 경우에만 html을 작성함
+- 종류:
+v-if
+v-else-if
+v-else
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      #app > p {
+        border: dashed black 1px;
+        width: 130px;
+        padding-left: 20px;
+        font-weight: bold;
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>1. v-if="" 내부에서 true/false값을 주는 방식</h3>
+      <p v-if="typewritersInStock">in stock</p>
+      <p v-else>not in stock</p>
+
+      <h3>2. v-if-"" 내부에서 비교연산자 쓸 수 있다.</h3>
+      <p v-if="typewriterCount>3">In stock</p>
+      <p v-else-if="typewriterCount>0">Very few left!</p>
+      <p v-else>Not in stock</p>
+
+      <h3>3. 함수의 반환값(true/false) 사용하는 예시</h3>
+      <p v-if="text.includes('pizza')">text가 pizza를 가지고 있으면 보인다.</p>
+      <p v-else>pizza가 없으면 안 보여요.</p>
+
+      <h3>연습</h3>
+      <div v-if="text.includes('pizza')">
+        <img src="./imgs/img_pizza.svg" alt="" />
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            typewritersInStock: false,
+            typewriterCount: 12,
+            text: "I like taco, pizza, Thai beef salad, pho soup and tagine.",
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
