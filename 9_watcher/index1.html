@@ -1,0 +1,57 @@
+<!-- 오래된 프로퍼티 값도 watch할 수 있음! -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #app {
+        border: dashed black 1px;
+        display: inline-block;
+        padding: 10px;
+      }
+      #app > div {
+        width: 200px;
+        height: 50px;
+        border: solid black 1px;
+        background-color: lightgreen;
+      }
+      #app > p {
+        font-size: large;
+        font-weight: bold;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div v-on:click="updatePos"></div>
+      <p>xPos: {{ xPos }}</p>
+      <p>xDiff: <code>{{ xDiff }}</code></p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            xPos: 0,
+            xDiff: 0,
+          };
+        },
+        watch: {
+          xPos(newVal, oldVal) {
+            this.xDiff = newVal - oldVal;
+          },
+        },
+        methods: {
+          updatePos(evt) {
+            this.xPos = evt.offsetX;
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
