@@ -1,0 +1,38 @@
+<!-- Vue Events 
+* vue의 이벤트 처리는 v-on 지시문으로 사용할 수 있다.
+* 이벤트 처리란 특정 이벤트가 발생할 때 특정 코드가 실행되도록 html 요소를 설정하는 경우이다.
+
+* 문법:
+v-on:(트리거)="(실행문)"
+* 트리거는 click, mouseover, mouseout, keydown, input 등등..
+HTML DOM Events에서 쓰는 거 다 쓸 수 있다.
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      img {
+        width: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <img src="../imgs/img_moose.jpg" alt="무스 이미지" />
+      <p>{{ "Moose count: " + count }}</p>
+      <button v-on:click="count++">Count moose</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            count: 0,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
