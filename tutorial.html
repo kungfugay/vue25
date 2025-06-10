@@ -3,7 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>My first Vue page</title>
   </head>
-  <body></body>
+  <body>
+    <!-- step1. <div > 추가 -->
+    <div id="app">
+      {{ message }} <br />
+      <!-- 텍스트 보간으로 메시지 표시 => 중괄호 안에 쓰기
+       브라우저는 vue 인스턴스의 message 프로퍼티에서 텍스트를 찾아서 vue 코드를 변환함
+        -->
+      {{'Random number: ' + Math.ceil(Math.random()*6) }}
+      <!-- 간단한 javascript 표현식도 중괄호 안에 쓸 수 있음 -->
+    </div>
+
+    <!-- step2. Vue에 링크 추가 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- step3. Vue 인스턴스 추가 -->
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: "Hello World!",
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
 </html>
