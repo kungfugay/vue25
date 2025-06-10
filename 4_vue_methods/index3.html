@@ -1,0 +1,34 @@
+<!-- 이벤트가 발생할 때 메소드로 인수를 전달하기 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <img src="../imgs/img_moose.jpg" />
+      <p>{{ "Moose count: " + count }}</p>
+      <button v-on:click="addMoose(+1)">+1</button>
+      <button v-on:click="addMoose(+5)">+5</button>
+      <button v-on:click="addMoose(-1)">-1</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        methods: {
+          addMoose(number) {
+            this.count += number;
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

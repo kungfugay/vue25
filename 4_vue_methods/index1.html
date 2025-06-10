@@ -1,0 +1,64 @@
+<!-- 
+method가 호출되면 기본적으로 event 객체가 함께 전달된다.
+event 객체에는 target 객체, event 타입 등의 데이터가 함께 오고,
+특히 mousemove나 click 같은 이벤트의 경우 mouse 포지션 등이 전달됨 
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mouse Pointer Position</title>
+    <style>
+      #app {
+        border: black dashed 1px;
+        width: 200px;
+        padding: 0 20px 20px 20px;
+      }
+      #app > div {
+        width: 160px;
+        height: 80px;
+        background-color: lightcoral;
+        padding: 20px;
+      }
+      #app span {
+        font-weight: bold;
+        font-family: "Courier New", Courier, monospace;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Example: Mouse Pointer Position</h1>
+
+    <div id="app">
+      <p>Move the mouse pointer over the box below:</p>
+      <!-- div 객체 위에서의 mousemove 이벤트가 발생하면 mousePos가 호출됨 -->
+      <div
+        v-on:mousemove="mousePos"
+        v-bind:style="{backgroundColor:'hsl('+xPos+',80%,80%)'}"
+      >
+        <span>xPos: {{ xPos }}</span> <br />
+        <span>yPos: {{ yPos }}</span>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            xPos: 0,
+            yPos: 0,
+          };
+        },
+        methods: {
+          // 기본적으로 mousemove 이벤트에는 마우스 커서의 위치 좌표값이 함께 옴
+          mousePos(event) {
+            this.xPos = event.offsetX;
+            this.yPos = event.offsetY;
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

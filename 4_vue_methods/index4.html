@@ -1,0 +1,53 @@
+<!-- 인수와 이벤트 객체를 모두 전달 -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #app {
+        border: dashed black 1px;
+        width: 180px;
+        padding: 10px;
+      }
+      #app img {
+        width: 100%;
+      }
+      #green {
+        background-color: lightgreen;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <p>Click on the tiger image:</p>
+      <img
+        src="../imgs/img_tiger_square.jpeg"
+        id="tiger"
+        v-on:click="myMethod($event,'Hello')"
+      />
+      <p>위 img의 id는 tiger이다.</p>
+      <p>"{{ msgAndId }}"</p>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            msgAndId: "",
+          };
+        },
+        methods: {
+          myMethod(e, msg) {
+            this.msgAndId = msg + ", ";
+            this.msgAndId += e.target.id;
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
