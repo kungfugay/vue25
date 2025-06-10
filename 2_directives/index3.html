@@ -1,0 +1,42 @@
+<!-- 
+v-show 지시어
+
+- 조건부 가시성
+- CSS의 'display' 값을 none으로 설정한다.
+- 문법
+  v-show="?" : ?의 값은 boolean으로 조정
+
+
+v-show와 v-if의 차이
+* v-show는 무조건 element를 일단 만들어두고(렌더링해둔뒤에) 속성값만 바꿈
+* v-if는 조건에 따라 element를 생성(렌더링)하거나 제거함.
+
+즉, v-if는 전환이 드물때, v-show는 전환이 잦을 때 쓴다.
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <!-- dispaly:none으로 조절됨 -->
+      <div v-show="showDiv">Div tag with v-show</div>
+
+      <!-- document에서 요소 제거됨 -->
+      <div v-if="showDiv">Div tag with v-if</div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            showDiv: false,
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
