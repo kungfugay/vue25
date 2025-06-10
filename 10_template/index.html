@@ -1,0 +1,38 @@
+<!-- 
+## Template
+- Vue에서 템플릿은 뷰 애플리케이션의 HTML 파트라고 한다.
+- template 태그는 나중에 .vue 파일에서 쓰일거임
+- vue 인스턴스의 configuration 옵션에서 사용할 수 있고 html 내부에 넣을 수 있음! (computed, data 처럼)
+
+아래처럼 html에 gather 되는 걸 볼 수 있지만, overview가 좋지는 않다.
+그래서 이제 방식을 Single File Components로(SFCs)로 사용할거다. 아니면 .vue 파일을 사용할 수도 있다.
+
+모든 .vue 파일들은 3가지 파트로만 구성된다.
+* <template> -- html 컨텐츠
+* <script> -- vue 코드
+* <style> -- CSS 스타일링
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        template: `<h1> {{ message }} </h1>`,
+        data() {
+          return {
+            message: "Hello Vue!",
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
