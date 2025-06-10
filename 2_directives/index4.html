@@ -1,0 +1,80 @@
+<!-- 
+v-for 지시어
+* v-for 속성으로 Vue 인스턴스 내부의 배열을 참조하고 Vue가 나머지를 처리
+* v-for가 참조하는 배열이 변경되면 자동으로 업데이트 된다.
+* 문법: v-for="조건식"
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+    <style>
+      #app > div {
+        border: solid black 1px;
+        width: 80%;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+      }
+
+      figure {
+        width: 80px;
+        padding: 10px;
+        margin: 10px;
+        background-color: lightskyblue;
+        border-radius: 5px;
+      }
+
+      figcaption {
+        text-align: center;
+      }
+
+      img {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <h3>배열 루프 사용하기</h3>
+      <ol>
+        <li v-for="x in manyFoods">{{x}}</li>
+      </ol>
+
+      <h3>객체 배열의 key값으로 루프 사용하기</h3>
+      <figure v-for="x in manyFoods">
+        <img v-bind:src="x.url" alt="" />
+        <figcaption>{{ x.name }}</figcaption>
+      </figure>
+
+      <h3>인덱스 번호 사용하기</h3>
+      <p v-for="(x,index) in manyFoods">
+        {{ index }} : "{{ x }}" <br />
+        {{ index }} : "{{ x.name }} ", url: "{{x.url}}" <br />
+      </p>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            manyFoods: [
+              { name: "Burrito", url: "./imgs/img_burrito.svg" },
+              { name: "Salad", url: "./imgs/img_salad.svg" },
+              { name: "Cake", url: "./imgs/img_cake.svg" },
+              { name: "Soup", url: "./imgs/img_soup.svg" },
+              { name: "Fish", url: "./imgs/img_fish.svg" },
+              { name: "Pizza", url: "./imgs/img_pizza.svg" },
+              { name: "Rice", url: "./imgs/img_rice.svg" },
+            ],
+          };
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
