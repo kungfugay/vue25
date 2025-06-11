@@ -1,25 +1,31 @@
 <template>
   <h1>Food</h1>
-  <food-item></food-item>
-  <food-item></food-item>
-  <food-item></food-item>
+  <div id="wrapper">
+    <food-item
+      food-name="Apples"
+      food-desc="Apples are a type of fruit that grow on trees."
+      v-bind:is-favorite="true"
+    />
+    <food-item
+      food-name="Pizza"
+      food-desc="Pizza has a bread base with tomato sauce, cheese, and toppings on top."
+      v-bind:is-favorite="false"
+    />
+    <food-item food-name="Rice" v-bind:is-favorite="false" />
+  </div>
 </template>
 
 <script></script>
 
 <style>
-#app > div {
+#wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+#wrapper > div {
   border: dashed black 1px;
-  display: inline-block;
   margin: 10px;
   padding: 10px;
   background-color: lightgreen;
-}
-/* 
-구성 요소를 개별적으로 작동시킬 수 있다
-고유의 한 id로 요소를 표시하지 않아도 각 구성 요소를 개별적으로 처리 가능
-*/
-#app > div:hover {
-  cursor: pointer;
 }
 </style>
