@@ -7,6 +7,7 @@
       :food-name="x.name"
       :food-desc="x.desc"
       :is-favorite="x.favorite"
+      @toggle-favorite="receiveEmit"
     />
   </div>
 </template>
@@ -43,6 +44,15 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    // food-item에 등록된 toggle-favorite 이벤트가 호출되면 foodName을 foodId라는 이름의 인수로
+    // receiveEmit으로 전달한다.
+    // 만약 가져온 foodId가 배열 food의 food.name과 같다면 favorite을 switch 한다.
+    receiveEmit(foodId) {
+      const foundFood = this.foods.find((food) => food.name === foodId);
+      foundFood.favorite = !foundFood.favorite;
+    },
   },
 };
 </script>
