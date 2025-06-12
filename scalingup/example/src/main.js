@@ -1,4 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import CompOne from "./components/CompOne.vue";
 
-createApp(App).mount('#app')
+const app = createApp(App);
+app.component("comp-one", CompOne);
+app.mount("#app");

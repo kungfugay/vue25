@@ -1,27 +1,27 @@
 <template>
-  <button @:click="fetchData">데이터 가져오기</button>
-    <ul v-if="data">
-      <li v-for="(user, index) in data.data" :key="index">
-        <div v-for="key in Object.keys(user)" :key="key">
-          {{ key }}: {{ user[key] }}
-        </div>
-      </li>
-    </ul>
+  <button @click="this.activeComp = !this.activeComp">
+    Add/Remove Component
+  </button>
+  <div>
+    <comp-one v-if="activeComp"></comp-one>
+  </div>
 </template>
 
 <script>
-import axios from "axios";
-
 export default {
   data() {
     return {
-      data: null,
+      activeComp: false,
     };
-  },
-  methods: {
-    async fetchData() {
-      this.data = await axios.get("https://jsonplaceholder.typicode.com/users");
-    },
   },
 };
 </script>
+
+<style scoped>
+div {
+  border-style: dotted;
+  border-width: 2px;
+  width: 150px;
+  height: 200px;
+}
+</style>
