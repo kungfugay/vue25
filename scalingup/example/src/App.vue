@@ -1,27 +1,20 @@
 <template>
-  <button @click="this.activeComp = !this.activeComp">
-    Add/Remove Component
-  </button>
+  <nav>
+    <router-link to="/home">HOME</router-link>
+    <router-link to="/about">ABOUT</router-link>
+  </nav>
+
   <div>
-    <comp-one v-if="activeComp"></comp-one>
+    <router-view></router-view>
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      activeComp: false,
-    };
-  },
-};
-</script>
-
 <style scoped>
-div {
-  border-style: dotted;
-  border-width: 2px;
-  width: 150px;
-  height: 200px;
+nav {
+  border-bottom: 2px solid black;
+  padding-bottom: 15px;
+}
+nav > a {
+  padding: 10px;
 }
 </style>
